@@ -34,6 +34,7 @@
             buttonRight = new Button();
             buttonDown = new Button();
             buttonUp = new Button();
+            buttonCreateCar = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxTrolleybus).BeginInit();
             SuspendLayout();
             // 
@@ -51,11 +52,22 @@
             buttonCreateTrolleybus.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             buttonCreateTrolleybus.Location = new Point(27, 544);
             buttonCreateTrolleybus.Name = "buttonCreateTrolleybus";
-            buttonCreateTrolleybus.Size = new Size(75, 23);
+            buttonCreateTrolleybus.Size = new Size(248, 23);
             buttonCreateTrolleybus.TabIndex = 1;
-            buttonCreateTrolleybus.Text = "Создать";
+            buttonCreateTrolleybus.Text = "Создать троллейбус";
             buttonCreateTrolleybus.UseVisualStyleBackColor = true;
             buttonCreateTrolleybus.Click += ButtonCreateTrolleybus_Click;
+            // 
+            // buttonCreateCar
+            // 
+            buttonCreateCar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonCreateCar.Location = new Point(290, 544);
+            buttonCreateCar.Name = "buttonCreateCar";
+            buttonCreateCar.Size = new Size(248, 23);
+            buttonCreateCar.TabIndex = 6;
+            buttonCreateCar.Text = "Создать автобус";
+            buttonCreateCar.UseVisualStyleBackColor = true;
+            buttonCreateCar.Click += ButtonCreateCar_Click;
             // 
             // buttonLeft
             // 
@@ -110,6 +122,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1027, 591);
+            Controls.Add(buttonCreateCar);
             Controls.Add(buttonUp);
             Controls.Add(buttonDown);
             Controls.Add(buttonRight);
@@ -130,5 +143,6 @@
         private Button buttonRight;
         private Button buttonDown;
         private Button buttonUp;
+        private Button buttonCreateCar;
     }
 }
