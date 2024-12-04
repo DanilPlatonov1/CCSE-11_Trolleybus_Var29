@@ -23,6 +23,15 @@ public class Drawning_Car
 
     private readonly int _drawningCarHeight = 60;    // Высота прорисовки автомобиля
 
+    public int? GetPosX => _startPosX;    //  Координата X объекта
+
+    public int? GetPosY => _startPosY;    // Координата Y объекта
+
+    public int GetWidth => _drawningCarWidth;    // Ширина объекта
+
+    public int GetHeight => _drawningCarHeight;    // Высота объекта
+
+
     /// <summary>
     /// Пустой конструктор
     /// </summary>
@@ -100,17 +109,17 @@ public class Drawning_Car
                 return true;
             // вправо
             case Direction_Type.Right:
-                //TODO прописать логику сдвига в право
+                if (_startPosX.Value + _drawningCarWidth + Entity_Car.Step < _pictureWidth)
+                    _startPosX += (int)Entity_Car.Step;
                 return true;
             //вниз
             case Direction_Type.Down:
-                //TODO прописать логику сдвига в вниз
+                if (_startPosY.Value + _drawningCarHeight + Entity_Car.Step < _pictureHeight)
+                    _startPosY += (int)Entity_Car.Step;
                 return true;
             default:
                 return false;
         }
-
-
     }
 
     /// <param name="g"></param>

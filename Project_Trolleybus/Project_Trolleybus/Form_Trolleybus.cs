@@ -1,4 +1,6 @@
 ﻿using Project_Trolleybus.Drawnings;
+using Project_Trolleybus.MovementStrategy;
+using ProjectSportCar.MovementStrategy;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +17,12 @@ namespace Project_Trolleybus
     {
         private Drawning_Car? _drawning_Car;
 
+        private AbstractStrategy? _strategy;
+
         public Form_Trolleybus()
         {
             InitializeComponent();
+            _strategy = null;
         }
 
         private void Draw()
@@ -35,7 +40,7 @@ namespace Project_Trolleybus
 
         private void CreateObject(string type)
         {
-            Random random = new ();
+            Random random = new();
             switch (type)
             {
                 case nameof(Drawning_Car):
@@ -55,6 +60,9 @@ namespace Project_Trolleybus
 
             _drawning_Car.SetPictureSize(pictureBoxTrolleybus.Width, pictureBoxTrolleybus.Height);
             _drawning_Car.SetPosition(random.Next(10, 100), random.Next(10, 100));
+
+            _strategy = null;
+            comboBoxStrategy.Enabled = true;
             Draw();
         }
 
@@ -97,6 +105,41 @@ namespace Project_Trolleybus
             if (result)
             {
                 Draw();
+            }
+        }
+
+        private void ButtonStrategyStep_Click(object sender, EventArgs e)
+        {
+            if (_drawning_Car == null)
+            {
+                return;
+            }
+            if (comboBoxStrategy.Enabled)
+            {
+                _strategy = comboBoxStrategy.SelectedIndex switch
+                {
+                    0 => new MoveToCenter(),
+                    1 => new MoveToBorder(),
+                    _ => null,
+                };
+                if (_strategy == null)
+                {
+                    return;
+                }
+                _strategy.SetData(new MoveableCar(_drawning_Car),
+                pictureBoxTrolleybus.Width, pictureBoxTrolleybus.Height);
+            }
+            if (_strategy == null)
+            {
+                return;
+            }
+            comboBoxStrategy.Enabled = false;
+            _strategy.MakeStep();
+            Draw();
+            if (_strategy.GetStatus() == StrategyStatus.Finish)
+            {
+                comboBoxStrategy.Enabled = true;
+                _strategy = null;
             }
         }
     }
